@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Articulos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{ 
+    <link rel="stylesheet" href="~/css/loading.css"/>
+}
+
+<h1>Listado de Artículos</h1>
+
+<div class="card">
+    <div class="card-header">
+        @Html.ActionLink("Agregar Artículo", "Create", "Articulo", null, new { @class = "btn btn-secondary float-right" })
+
+        <div class="float-left">
+            <label for="">Estado:</label>
+            <select class="custom-select w-auto" id="selected_state_article">
+                <option value="1" selected>Activos</option>
+                <option value="2">Inactivo</option>
+            </select>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-striped" id="table-articles">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Costo</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody id="table-content">
+            </tbody>
+        </table>
+
+        @*spinner to wait by loading records*@
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/articulos.js"></script>
+    <script src="~/lib/sweetalert2/dist/sweetalert2.all.min.js"></script>
+}

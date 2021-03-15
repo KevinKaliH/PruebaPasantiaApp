@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Facturas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link rel="stylesheet" href="~/css/loading.css" />
+}
+
+<h1>Listado de Facturas</h1>
+
+<div class="card">
+    <div class="card-header">
+        @Html.ActionLink("Nueva Factura", "Create", "Factura", null, new { @class = "btn btn-secondary float-right" })
+
+    </div>
+    <div class="card-body">
+
+        <table class="table table-striped" id="table-facturas">
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Fecha</th>
+                    <th>Subtotal</th>
+                    <th>Impuesto</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="table-content">
+            </tbody>
+        </table>
+
+        @*spinner to wait by loading records*@
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/factura/getFacturas.js"></script>
+}

@@ -1,0 +1,60 @@
+﻿@model WebApplication1.ViewModel.ArticuloVM
+
+@{
+    ViewData["Title"] = "Articulos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewData["message"] != null)
+{
+    <div class="alert alert-dark" role="alert">
+        @ViewData["message"]
+    </div>
+}
+
+<h1>Crear Artículo</h1>
+
+@*<h4>ArticuloVM</h4>*@
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" id="form-article">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @await Html.PartialAsync("~/Views/Articulo/partials/form_articulos.cshtml")
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index"><i class="fas fa-arrow-circle-left"></i> Lista de Artículos</a>
+</div>
+
+@section Scripts  {
+    <script>
+
+        //con esta funcion se pretende validar que por motivos de Globalizacion (en-US) el valor punto
+        //sea reemplazado por coma para dar lugar a valores decimales
+        $("#form-article").submit(function (event) {
+            let value = $("#Costo").val();
+
+            if (!isNaN(value)) {
+                value = value.replace(".", ",");
+                $("#Costo").val(value);
+            }
+
+            let value2 = $("#Precio").val();
+
+            if (!isNaN(value2)) {
+                value2 = value2.replace(".", ",");
+                $("#Precio").val(value2);
+            }
+
+            //let active = $("activo").val()==1 ? true;
+        });
+    </script>
+}

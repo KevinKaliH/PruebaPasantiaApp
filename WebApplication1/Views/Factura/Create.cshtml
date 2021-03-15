@@ -1,0 +1,128 @@
+﻿@model WebApplication1.ViewModel.FacturaVM
+
+@{
+    ViewData["Title"] = "Facturas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{ 
+    <link rel="stylesheet" href="~/css/loading.css"/>
+}
+
+<h1>Nueva Factura</h1>
+
+<div class="card">
+    <!-- Secion detalle factura -->
+    <div class="row">
+        <div class="col mt-4 ml-5 mb-2">
+            <label asp-for="FechaRegistro">Fecha Registro:</label>
+            <input asp-for="FechaRegistro" class="ml-2" type="date" />
+            @*<input type="date" class="ml-2" id="datePicker">*@
+        </div>
+
+        <div class="col mt-4 ml-5 mb-2">
+            <label for="" class="ml-2">% Impuesto Aplicado:</label>
+            <input id="valorImp" type="number" class="ml-2 form-control d-inline w-auto" disabled>
+        </div>
+    </div>
+
+    <!-- Navegacion para agregar articulo a la factura -->
+    <div class="card mx-5">
+        <div class="card-header pb-1">
+            <h5>Agregar Artículo<span class="ml-2 font-weight-light">(Solo activos)</span></h5>
+        </div>
+
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="">Código:</label>
+                    <input id="search_text" type="text" maxlength="5" class="form-control" placeholder="Escribir...">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Cantidad">Cantidad:</label>
+                    <input id="Cantidad" name="Cantidad" type="number" class="form-control" value="1">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label>Código:</label>
+                    <input id="Codigo" type="text" class="form-control" disabled>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Descripcion:</label>
+                    <input id="Descripcion" type="text" class="form-control" disabled>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Precio</label>
+                    <input id="Precio" type="number" class="form-control" disabled>
+                </div>
+                <div class="form-group col-md-3 d-flex align-items-end">
+                    <button class="btn btn-success" id="btn-agregar">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin navegacion factura -->
+    <!-- Tabla Detalle Factura -->
+    <div class="row mx-5 mt-3">
+        <table class="table table-bordered" id="table-content">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Impuesto</th>
+                    <th>Total</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody id="tbody-articles"></tbody>
+        </table>
+    </div>
+
+    <!-- Contenido totales de factura -->
+    <div class="d-flex align-items-end flex-column">
+        <div class="my-2">
+            <div class="form-inline">
+                <label asp-for="Subtotal">Subtotal:</label>
+                <input asp-for="Subtotal" class="form-control mx-sm-3" disabled>
+            </div>
+        </div>
+
+        <div class="my-2">
+            <div class="form-inline">
+                <label asp-for="Impuesto">Impuesto:</label>
+                <input asp-for="Impuesto" class="form-control mx-sm-3" disabled>
+            </div>
+        </div>
+
+        <div class="my-2">
+            <div class="form-inline">
+                <label asp-for="Total">Total:</label>
+                <input asp-for="Total" class="form-control mx-sm-3" disabled>
+            </div>
+        </div>
+
+        <div class="my-2">
+            <div class="form-inline">
+                <button class="btn btn-primary mr-2" onclick="submit_factura()">Guardar</button>
+                <button class="btn btn-danger">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    @*<div>
+            <a asp-action="Index">Back to List</a>
+        </div>*@
+
+@section Scripts {
+    <script src="~/lib/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/js/factura/factura.js"></script>
+    <script src="~/js/factura/filter_articulo.js"></script>
+}
+
