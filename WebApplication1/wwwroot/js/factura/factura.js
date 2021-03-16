@@ -196,16 +196,20 @@ function save_details(idFactura) {
             data: detail,
 
             success: function (response) {
-                console.log(response);
+                save_changes(index);
             }
         })
     });
+}
 
-    Swal.fire({
-        icon: 'success',
-        title: 'Guardada exitosamente',
-        text: 'Registro almacenado con exito!',
-    }, function(){
-        window.location.href = '/Factura/Index/';
-    });
+function save_changes(index) {
+    if (detalles.length-1 == index) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Guardada exitosamente',
+            text: 'Registro almacenado con exito!',
+        }).then(function () {
+            window.location.href = "/Factura";
+        });
+    }
 }
