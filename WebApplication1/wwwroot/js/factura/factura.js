@@ -157,24 +157,24 @@ function submit_factura() {
             title: 'Agregar detalles de articulos',
             text: 'No ha agregado ningun articulo!',
         });
-    }
-
-    let facturaDto = {
-        FechaRegistro: $("#FechaRegistro").val(),
-        Subtotal: subtotal_global,
-        Total: total_global,
-        Impuesto: impuesto_global
-    }
-
-    $.ajax({
-        type: "POST",
-        url: "/Factura/Create",
-        dataType: 'json',
-        data: facturaDto,
-        success: function (response) {
-            save_details(response.data);
+    } else {
+        let facturaDto = {
+            FechaRegistro: $("#FechaRegistro").val(),
+            Subtotal: subtotal_global,
+            Total: total_global,
+            Impuesto: impuesto_global
         }
-    })
+
+        $.ajax({
+            type: "POST",
+            url: "/Factura/Create",
+            dataType: 'json',
+            data: facturaDto,
+            success: function (response) {
+                save_details(response.data);
+            }
+        })
+    }
 }
 
 function save_details(idFactura) {
@@ -199,5 +199,13 @@ function save_details(idFactura) {
                 console.log(response);
             }
         })
+    });
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Guardada exitosamente',
+        text: 'Registro almacenado con exito!',
+    }, function(){
+        window.location.href = '/Factura/Index/';
     });
 }
